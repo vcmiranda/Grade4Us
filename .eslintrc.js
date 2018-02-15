@@ -38,5 +38,6 @@ module.exports = {
     'no-shadow': 0,
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
+    'linebreak-style': 0,
   }
 }
