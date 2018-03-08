@@ -2,7 +2,7 @@
   <v-toolbar app class="elevation-0 transparent" dense fixed>
     <v-toolbar-title class="ml-3 pt-2">
       <router-link to="/">
-        <img src="./../../assets/img/logo/logo.png" width="150px;">
+        <img src="../../../assets/img/logo/logo.png" width="150px;">
       </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
