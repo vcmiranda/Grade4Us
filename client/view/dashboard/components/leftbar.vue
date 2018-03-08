@@ -67,7 +67,7 @@ export default {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',
         text: 'Teacher Section',
-        model: true,
+        model: false,
         children: [
           { icon: 'add', text: 'Manage Classes' },
           { icon: 'add', text: 'Manage Students' },
@@ -77,7 +77,7 @@ export default {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',
         text: 'Parent Section',
-        model: true,
+        model: false,
         children: [
           { icon: 'add', text: 'Manage Children' },
           { icon: 'add', text: 'Visualize Grades' },
