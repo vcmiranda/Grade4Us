@@ -5,7 +5,7 @@
         <v-flex xs12>
           <topbar class="topbar"></topbar>
           <v-card>
-            <v-card-media class="Bgd topbar" :src="getImage('bgd1.jpg')" height="100vh">
+            <v-card-media class="Bgd topbar" :src="getImage(bgImage)" height="100vh">
               <v-content>
                 <router-view></router-view>
               </v-content>
@@ -21,6 +21,17 @@
 import topbar from './components/topbar.vue';
 
 export default {
+  data: () => {
+    return {
+      bgImage: 'bgd1.jpg',
+      bgImages: [
+        'bgd2.jpg',
+        'bgd3.jpg',
+        'bgd4.jpg',
+        'bgd1.jpg',
+    ]
+    }
+  },
   components: {
     topbar,
   },
@@ -30,7 +41,18 @@ export default {
       return require(`../../assets/img/background/${img}`);
       /* eslint-enable */
     },
+    changeImage() {
+      let index = 0;
+
+      setInterval(() => {
+        this.bgImage = this.bgImages[index];
+        index = (index + 1) % this.bgImages.length;
+      }, 5000);
+    }
   },
+  created: function() {
+    this.changeImage();
+  }
 };
 </script>
 
@@ -51,6 +73,12 @@ export default {
 
   .Bgd .card__media__content {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  }
+</style>
+
+<style>
+  .Bgd .card__media__background {
+    transition: background 1.5s linear;
   }
 </style>
 
