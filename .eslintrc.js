@@ -39,5 +39,6 @@ module.exports = {
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
     'linebreak-style': 0,
+    'no-console': 0,
   }
 }

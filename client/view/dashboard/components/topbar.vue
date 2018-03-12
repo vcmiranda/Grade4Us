@@ -1,35 +1,73 @@
 <template>
-  <v-toolbar color="blue darken-3" dark app :clipped-left="$vuetify.breakpoint.mdAndUp" fixed>
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon>
-      <span class="hidden-sm-and-down">Grade4Us Dashboard</span>
+  <v-toolbar app color="primary" class="elevation-10" clipped-left dense fixed>
+    <v-toolbar-side-icon dark @click="toggleDrawer"></v-toolbar-side-icon>
+    <v-toolbar-title class="ml-3 pt-2">
+      <router-link to="/">
+        <img src="../../../assets/img/logo/logo.png" width="150px;">
+      </router-link>
     </v-toolbar-title>
-    <v-text-field flat solo-inverted prepend-icon="search" label="Search" class="hidden-sm-and-down"></v-text-field>
     <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>apps</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>notifications</v-icon>
-    </v-btn>
-    <v-btn icon large>
-      <v-avatar size="32px" tile>
-        <img src="https://vuetifyjs.com/static/doc-images/logo.svg" alt="Vuetify">
-      </v-avatar>
-    </v-btn>
+    <v-menu offset-y :close-on-content-click="false" v-model="menu">
+      <v-btn color="transparent" dark class="elevation-0" slot="activator">Hi, {{ `${user.firstname} ${user.lastname}` }}</v-btn>
+      <v-card>
+        <v-list>
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <v-icon>mdi-school</v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ `${user.firstname} ${user.lastname}` }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ user.email }}</v-list-tile-sub-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+        <v-divider></v-divider>
+        <v-list class="pb-0 pt-0">
+          <v-list-tile @click="logoutUser">
+            <v-list-tile-action>
+              <v-icon>mdi-account</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>My Account</v-list-tile-title>
+          </v-list-tile>
+          <v-divider></v-divider>
+          <v-list-tile @click="logoutUser">
+            <v-list-tile-action>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-card>
+    </v-menu>
   </v-toolbar>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   data: () => ({
+    menu: false,
   }),
+  computed: {
+    ...mapState('auth', [
+      'user',
+    ]),
+  },
   methods: {
     ...mapMutations('layout', [
       'toggleDrawer',
+      'showLoginBtn',
+      'toggleLoginForm',
     ]),
+    ...mapActions('auth', [
+      'logout',
+    ]),
+    logoutUser() {
+      this.showLoginBtn();
+      this.toggleLoginForm();
+      this.logout();
+    },
   },
   props: {
     source: String,

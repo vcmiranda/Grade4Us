@@ -1,7 +1,7 @@
 const router = require('express').Router({ mergeParams: true });
 // const auth = require('../middleware/middle.auth');
 
-// router.use('/api/auth/', require('./routes.auth'));
+router.use('/api/auth/', require('./routes.auth'));
 
 // Routes that require auth
 // router.use('/api/admin/:admin_id', auth, require('./routes.admin'));
