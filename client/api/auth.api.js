@@ -9,7 +9,7 @@ const auth = {
     return firebase.auth().signOut();
   },
   getUser(firebaseUID) {
-    return axios.post('/auth/login', { firebaseUID });
+    return axios.post('/api/auth/login', { firebaseUID });
   },
 };
 
