@@ -1,16 +1,14 @@
 <template>
-  <v-app light>
-    <v-container fluid ma-0 pa-0>
-      <topbar class="topbar"></topbar>
-      <v-card>
-        <transition name="fade">
-          <v-card-media class="Bgd topbar" :src="getImage('bgd1.jpg')" height="100vh">
-            <router-view></router-view>
-          </v-card-media>
-        </transition>
-      </v-card>
-    </v-container>
-  </v-app>
+  <v-container fluid ma-0 pa-0>
+    <topbar class="topbar"></topbar>
+    <v-card>
+      <transition name="fade">
+        <v-card-media class="Bgd topbar" :src="getImage('bgd1.jpg')" height="100vh">
+          <router-view></router-view>
+        </v-card-media>
+      </transition>
+    </v-card>
+  </v-container>
 </template>
 
 <script>

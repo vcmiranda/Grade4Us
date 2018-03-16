@@ -4,7 +4,8 @@ import router from '../../../router';
 
 const state = {
   user: null,
-  loading: null,
+  loading: false,
+  error: null,
 };
 
 const getters = {
@@ -14,18 +15,31 @@ const getters = {
 const mutations = {
   setUser(state, data) {
     state.user = data;
+    localStorage.setItem('user', JSON.stringify(data));
   },
   clearUser(state, data) {
     state.user = data;
+  },
+  setLoading(state, data) {
+    state.loading = data;
+  },
+  setError(state, data) {
+    state.error = data;
+  },
+  clearError(state) {
+    state.error = null;
   },
 };
 
 const actions = {
   login({ commit }, data) {
+    commit('setLoading', true);
+    commit('clearError');
     authAPI.login(data)
       .then((userFirebase) => {
         authAPI.getUser(userFirebase.uid)
           .then((user) => {
+            commit('setLoading', false);
             commit('setUser', user.data);
             if (user.data.admin_id) {
               router.push({ path: '/dashboard/admin/' });
@@ -38,7 +52,8 @@ const actions = {
             console.log(err);
           });
       }).catch((err) => {
-        console.log(err);
+        commit('setLoading', false);
+        commit('setError', err);
       });
   },
   logout({ commit }) {

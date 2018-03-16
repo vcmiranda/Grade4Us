@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app color="primary" class="elevation-10" clipped-left dense fixed>
+  <v-toolbar app color="primary" class="elevation-10" fixed>
     <v-toolbar-side-icon dark @click="toggleDrawer"></v-toolbar-side-icon>
     <v-toolbar-title class="ml-3 pt-2">
       <router-link to="/">
@@ -68,9 +68,6 @@ export default {
       this.toggleLoginForm();
       this.logout();
     },
-  },
-  props: {
-    source: String,
   },
 };
 </script>

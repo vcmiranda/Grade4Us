@@ -1,11 +1,9 @@
 <template>
-  <v-app light>
+  <v-container fluid ma-0 pa-0>
     <leftbar></leftbar>
     <topbar></topbar>
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-  </v-app>
+    <router-view></router-view>
+  </v-container>
 </template>
 
 <script>
