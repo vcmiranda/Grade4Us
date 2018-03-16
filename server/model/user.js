@@ -11,7 +11,15 @@ module.exports = {
       .leftJoin('teacher', 'user.user_id', 'teacher.user_id')
       .leftJoin('parent', 'user.user_id', 'parent.user_id')
       .where(filter)
-      .select('user.*', 'admin.admin_id', 'teacher.teacher_id', 'parent.parent_id');
+      .select(
+        'user.email',
+        'user.firstname',
+        'user.lastname',
+        'user.phone',
+        'admin.admin_id',
+        'teacher.teacher_id',
+        'parent.parent_id',
+      );
   },
 
   /**

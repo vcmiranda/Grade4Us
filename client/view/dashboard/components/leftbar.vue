@@ -1,7 +1,7 @@
 <template>
-  <v-navigation-drawer fixed :clipped="$vuetify.breakpoint.mdAndUp" app :value="drawer">
+  <v-navigation-drawer dark fixed clipped app hide-overlay :value="drawer">
     <v-list dense>
-      <template v-for="item in items">
+      <template v-for="item in menuItems">
         <v-layout row v-if="item.heading" align-center :key="item.heading" >
           <v-flex xs6>
             <v-subheader v-if="item.heading">
@@ -51,50 +51,58 @@ import { mapState } from 'vuex';
 
 export default {
   data: () => ({
-    items: [
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Admin Section',
-        model: true,
-        children: [
-          { icon: 'add', text: 'Manage Teachers Accounts' },
-          { icon: 'add', text: 'Manage Students Accounts' },
-          { icon: 'add', text: 'Manage Parents Accounts' },
-        ],
-      },
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Teacher Section',
-        model: false,
-        children: [
-          { icon: 'add', text: 'Manage Classes' },
-          { icon: 'add', text: 'Manage Students' },
-        ],
-      },
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Parent Section',
-        model: false,
-        children: [
-          { icon: 'add', text: 'Manage Children' },
-          { icon: 'add', text: 'Visualize Grades' },
-        ],
-      },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Send feedback' },
-      { icon: 'help', text: 'Help' },
-    ],
   }),
   computed: {
     ...mapState('layout', [
       'drawer',
     ]),
-  },
-  props: {
-    source: String,
+    ...mapState('auth', [
+      'user',
+    ]),
+    menuItems() {
+      const menuItems = [];
+      if (this.user && this.user.admin_id) {
+        menuItems.push({
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          text: 'Admin Section',
+          model: false,
+          children: [
+            { icon: 'add', text: 'Manage Teachers Accounts' },
+            { icon: 'add', text: 'Manage Students Accounts' },
+            { icon: 'add', text: 'Manage Parents Accounts' },
+          ],
+        });
+      } else if (this.user && this.user.teacher_id) {
+        menuItems.push({
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          text: 'Teacher Section',
+          model: false,
+          children: [
+            { icon: 'add', text: 'Manage Classes' },
+            { icon: 'add', text: 'Manage Students' },
+          ],
+        });
+      } else if (this.user && this.user.parent_id) {
+        menuItems.push({
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          text: 'Parent Section',
+          model: false,
+          children: [
+            { icon: 'add', text: 'Manage Children' },
+            { icon: 'add', text: 'Visualize Grades' },
+          ],
+        });
+      }
+      menuItems.push(
+        { icon: 'settings', text: 'Settings' },
+        { icon: 'chat_bubble', text: 'Send feedback' },
+        { icon: 'help', text: 'Help' },
+      );
+      return menuItems;
+    },
   },
 };
 </script>
