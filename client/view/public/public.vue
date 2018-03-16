@@ -19,7 +19,10 @@
 import topbar from './components/topbar.vue';
 
 export default {
-  data: () => {
+  components: {
+    topbar,
+  },
+  data() {
     return {
       bgImage: 'bgd1.jpg',
       bgImages: [
@@ -27,21 +30,11 @@ export default {
         'bgd3.jpg',
         'bgd4.jpg',
         'bgd1.jpg',
-    ]
-    }
-  },
-  components: {
-    topbar,
-  },
-  data() {
-    return {
-      items: [
-        { src: 'bgd1.jpg' },
-        { src: 'bgd2.jpg' },
-        { src: 'bgd3.jpg' },
-        { src: 'bgd4.jpg' },
       ],
     };
+  },
+  created() {
+    this.changeImage();
   },
   methods: {
     getImage(img) {
@@ -51,16 +44,12 @@ export default {
     },
     changeImage() {
       let index = 0;
-
       setInterval(() => {
         this.bgImage = this.bgImages[index];
         index = (index + 1) % this.bgImages.length;
       }, 5000);
-    }
+    },
   },
-  created: function() {
-    this.changeImage();
-  }
 };
 </script>
 
