@@ -84,7 +84,7 @@ export default {
     25% { opacity: 0; }
     100% { opacity: 0; }
   }
-  /*4.16666666666667*/
+
   @keyframes fade2 {
     0% { opacity: 0; }
     20.83333333333333% { opacity: 0; }
