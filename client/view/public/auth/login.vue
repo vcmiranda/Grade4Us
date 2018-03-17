@@ -9,7 +9,7 @@
           <span :class="classTxt">Login to Grade4Us</span>
           <v-form v-model="valid" ref="form" lazy-validation class="mt-3">
             <v-text-field box label="E-mail" type="email" v-model="credentials.email" :rules="emailRules" required></v-text-field>
-            <v-text-field box label="Password" type="password" v-model="credentials.password" required></v-text-field>
+            <v-text-field box label="Password" type="password" @keyup.enter="loginUser" v-model="credentials.password" required></v-text-field>
             <v-btn block color="primary" class="my-3" @click="loginUser" :loading="loading" :disabled="loading">
               Login
               <span slot="loader" class="custom-loader">
