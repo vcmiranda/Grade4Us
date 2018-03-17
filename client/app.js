@@ -12,9 +12,9 @@ Vue.use(
   Vuetify,
   {
     theme: {
-      primary: '#424242',
-      secondary: '#ee44aa',
-      accent: '#82B1FF',
+      primary: '#3878c2',
+      secondary: '#8049A7',
+      accent: '#E57500',
       error: '#FF5252',
       info: '#2196F3',
       success: '#4CAF50',
