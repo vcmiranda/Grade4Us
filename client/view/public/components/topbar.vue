@@ -1,11 +1,14 @@
 <template>
   <v-toolbar app class="elevation-10 transparent" dense fixed>
-    <v-toolbar-title class="ml-3 pt-2">
-      <img :src="getImage(logo)" width="150px;" @click="sendHome" class="pointer">
+    <v-toolbar-title>
+      <img :src="getImage(logo)" @click="sendHome" :class="logoSize">
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn v-if="loginBtn" color="transparent" dark class="elevation-0" @click="showLoginForm">Login</v-btn>
-    <v-menu v-else offset-y :close-on-content-click="false" v-model="menu">
+    <v-btn v-if="loginBtn && $vuetify.breakpoint.smAndUp" color="transparent" dark class="elevation-0" @click="showLoginForm">Login</v-btn>
+    <v-btn v-if="loginBtn && $vuetify.breakpoint.xsOnly" color="white" dark class="elevation-0" @click="showLoginForm" flat icon>
+      <v-icon>mdi-login</v-icon>
+    </v-btn>
+    <v-menu v-else-if="!loginBtn" offset-y :close-on-content-click="false" v-model="menu">
       <v-btn color="transparent" dark class="elevation-0" slot="activator">{{ `Hi, ${user.firstname} ${user.lastname}` }}</v-btn>
       <v-card>
         <v-list class="pb-0 pt-0">
@@ -61,6 +64,12 @@ export default {
     ...mapState('layout', [
       'loginBtn',
     ]),
+    logoSize() {
+      return {
+        'logo150 pointer': this.$vuetify.breakpoint.mdAndUp,
+        'logo100 pointer': this.$vuetify.breakpoint.smAndDown,
+      };
+    },
   },
   methods: {
     ...mapMutations('layout', [
@@ -91,3 +100,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .logo150 {
+    width: 150px;
+  }
+  .logo100 {
+    width: 100px;
+  }
+</style>

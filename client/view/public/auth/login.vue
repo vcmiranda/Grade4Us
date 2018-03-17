@@ -1,12 +1,12 @@
 <template>
   <v-container fluid ma-0 pa-0 fill-height>
     <v-layout row wrap justify-center align-center>
-      <v-flex xs12 sm8 md4 lg3 class="text-xs-center">
+      <v-flex xs10 sm6 md4 lg3 class="text-xs-center">
         <v-alert type="error" dismissible class="ma-0" :value="alert" @click="clear">
           {{ error ? error.message : '' }}
         </v-alert>
         <v-card flat color="white" class="ma-0 pa-3">
-          <span class="display-1 primary--text">Login to Grade4Us</span>
+          <span :class="classTxt">Login to Grade4Us</span>
           <v-form v-model="valid" ref="form" lazy-validation class="mt-3">
             <v-text-field box label="E-mail" type="email" v-model="credentials.email" :rules="emailRules" required></v-text-field>
             <v-text-field box label="Password" type="password" v-model="credentials.password" required></v-text-field>
@@ -47,6 +47,12 @@ export default {
         return true;
       }
       return false;
+    },
+    classTxt() {
+      return {
+        'display-1 primary--text': this.$vuetify.breakpoint.lgAndUp,
+        'headline primary--text': this.$vuetify.breakpoint.mdAndDown,
+      };
     },
   },
   methods: {

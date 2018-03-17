@@ -1,12 +1,13 @@
 <template>
   <v-toolbar app :color="barColor" class="elevation-10" dense fixed clipped-left>
     <v-toolbar-side-icon dark @click.stop="toggleDrawer"></v-toolbar-side-icon>
-    <v-toolbar-title class="ml-3 pt-2">
-      <img :src="getImage(logo)" width="150px;" @click="sendHome" class="pointer">
+    <v-toolbar-title>
+      <img :src="getImage(logo)" @click="sendHome" :class="logoSize">
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-menu offset-y :close-on-content-click="false" v-model="menu">
-      <v-btn color="transparent" dark class="elevation-0" slot="activator">Hi, {{ `${user.firstname} ${user.lastname}` }}</v-btn>
+      <v-btn v-if="$vuetify.breakpoint.smAndUp" color="transparent" dark class="elevation-0" slot="activator">Hi, {{ `${user.firstname} ${user.lastname}` }}</v-btn>
+      <v-btn v-else color="transparent" dark class="elevation-0" slot="activator"><v-icon>mdi-logout</v-icon></v-btn>
       <v-card>
         <v-list>
           <v-list-tile avatar>
@@ -71,6 +72,12 @@ export default {
       }
       return 'secondary';
     },
+    logoSize() {
+      return {
+        'logo150 pointer': this.$vuetify.breakpoint.mdAndUp,
+        'logo100 pointer': this.$vuetify.breakpoint.smAndDown,
+      };
+    },
   },
   methods: {
     ...mapMutations('layout', [
@@ -106,3 +113,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .logo150 {
+    width: 150px;
+  }
+  .logo100 {
+    width: 100px;
+  }
+</style>

@@ -44,11 +44,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data: () => ({
   }),
+  created() {
+    if (this.$vuetify.breakpoint.xsOnly) {
+      this.toggleDrawer();
+    }
+  },
   computed: {
     ...mapState('layout', [
       'drawer',
@@ -112,6 +117,11 @@ export default {
       );
       return menuItems;
     },
+  },
+  methods: {
+    ...mapMutations('layout', [
+      'toggleDrawer',
+    ]),
   },
   props: {
     source: String,

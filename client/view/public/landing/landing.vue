@@ -1,7 +1,7 @@
 <template>
   <v-container fluid ma-0 pa-0 fill-height align-center>
     <v-layout row wrap>
-      <v-flex v-if="!loginForm" xs12 text-xs-center class="textContainer display-4 white--text">
+      <v-flex v-if="!loginForm" xs12 text-xs-center :class="classTxt">
         {{ text.title }}
       </v-flex>
       <v-flex v-else>
@@ -29,6 +29,13 @@ export default {
     ...mapState('layout', [
       'loginForm',
     ]),
+    classTxt() {
+      return {
+        'textContainer display-4 white--text': this.$vuetify.breakpoint.mdAndUp,
+        'textContainer display-3 white--text': this.$vuetify.breakpoint.smOnly,
+        'textContainer display-2 white--text': this.$vuetify.breakpoint.xsOnly,
+      };
+    },
   },
 };
 </script>
