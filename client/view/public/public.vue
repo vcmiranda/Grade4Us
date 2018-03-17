@@ -4,12 +4,12 @@
       <v-flex xs12>
         <topbar></topbar>
         <v-layout>
-          <img
+          <div
             v-for="(image,i) in bgImages"
-            :src="getImage(image.src)"
+            :style="{ backgroundImage: 'url(' + getImage(image.src) + ')' }"
             :alt="image.src"
             :class="image.class"
-            :key="i">
+            :key="i"></div>
           <router-view></router-view>
         </v-layout>
       </v-flex>
@@ -33,7 +33,7 @@ export default {
     ],
   }),
   created() {
-    this.changeImage();
+//    this.changeImage();
   },
   methods: {
     getImage(img) {
@@ -41,29 +41,24 @@ export default {
       return require(`../../assets/img/background/${img}`);
       /* eslint-enable */
     },
-    changeImage() {
-      let index = 0;
-      setInterval(() => {
-        this.bgImage = this.bgImages[index];
-        index = (index + 1) % this.bgImages.length;
-      }, 5000);
-    },
   },
 };
 </script>
 
 <style scoped>
   .fixBgd {
-    position: fixed;
-    top: 0;
+    position: absolute;
     width: 100%;
+    height: 100vh;
   }
 
   .img {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    animation-duration: 5s;
+    animation-duration: 25s;
     animation-direction: alternate;
+    background-size: cover;
+    background-position: center center;
   }
 
   .img1 {
@@ -83,35 +78,37 @@ export default {
   }
 
   @keyframes fade1 {
-    0% { opacity: 1; }
+    0% { opacity: 0; }
+    5% { opacity: 1; }
     25% { opacity: 1; }
-    50% {opacity: 1 }
-    75% { opacity: 0; }
+    30% { opacity: 0; }
     100% { opacity: 0; }
   }
 
   @keyframes fade2 {
     0% { opacity: 0; }
     25% { opacity: 0; }
-    50% {opacity: 1 }
-    75% { opacity: 1; }
-    100% { opacity: 1; }
+    30% { opacity: 1; }
+    50% { opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 0; }
   }
 
   @keyframes fade3 {
-    0% { opacity: 1; }
-    25% { opacity: 1; }
-    50% {opacity: 1 }
-    75% { opacity: 0; }
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    55% {opacity: 1; }
+    75% { opacity: 1; }
+    80% { opacity: 0; }
     100% { opacity: 0; }
   }
 
   @keyframes fade4 {
     0% { opacity: 0; }
-    25% { opacity: 0; }
-    50% {opacity: 1 }
-    75% { opacity: 1; }
+    75% {opacity: 0; }
+    80% { opacity: 1; }
     100% { opacity: 1; }
+    105% { opacity: 0; }
   }
 </style>
 
