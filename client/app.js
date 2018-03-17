@@ -1,7 +1,8 @@
 import Vue from 'vue';
 
 import Vuetify from 'vuetify';
-import 'vuetify/dist/vuetify.css';
+import 'vuetify/dist/vuetify.min.css';
+import './assets/css/main.css';
 import Firebase from './scripts/firebase';
 import App from './view/App.vue';
 import router from './router/index';

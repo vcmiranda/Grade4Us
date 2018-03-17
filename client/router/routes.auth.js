@@ -1,6 +1,6 @@
 // Auth Pages
 import Login from '../view/public/auth/login.vue';
-import Register from '../view/public/auth/register.vue';
+// import Register from '../view/public/auth/register.vue';
 
 export default [
   {
@@ -8,9 +8,9 @@ export default [
     name: 'Login',
     component: Login,
   },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
-  },
+  // {
+  //   path: '/register',
+  //   name: 'Register',
+  //   component: Register,
+  // },
 ];

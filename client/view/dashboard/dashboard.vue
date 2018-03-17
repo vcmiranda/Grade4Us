@@ -1,8 +1,8 @@
 <template>
   <v-container fluid ma-0 pa-0>
-    <leftbar></leftbar>
+    <leftbar class="top"></leftbar>
     <topbar></topbar>
-    <router-view></router-view>
+    <router-view class="top"></router-view>
   </v-container>
 </template>
 
@@ -19,11 +19,7 @@ export default {
 </script>
 
 <style scoped>
-.topbar {
-  position: fixed;
-  overflow: hidden;
-  top: 0;
-  width: 100%;
-}
+  .top {
+    margin-top: 48px !important;
+  }
 </style>
-

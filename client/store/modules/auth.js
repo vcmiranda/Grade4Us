@@ -1,15 +1,16 @@
 /* eslint-disable no-param-reassign */
-import authAPI from '../../../api/auth.api';
-import router from '../../../router';
+import authAPI from '../../api/auth.api';
+import router from '../../router';
+
+const userStorage = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
 
 const state = {
-  user: null,
+  user: userStorage,
   loading: false,
   error: null,
 };
 
 const getters = {
-
 };
 
 const mutations = {
@@ -17,8 +18,9 @@ const mutations = {
     state.user = data;
     localStorage.setItem('user', JSON.stringify(data));
   },
-  clearUser(state, data) {
-    state.user = data;
+  clearUser(state) {
+    localStorage.removeItem('user');
+    state.user = userStorage;
   },
   setLoading(state, data) {
     state.loading = data;
@@ -32,7 +34,7 @@ const mutations = {
 };
 
 const actions = {
-  login({ commit }, data) {
+  login({ commit, dispatch }, data) {
     commit('setLoading', true);
     commit('clearError');
     authAPI.login(data)
@@ -41,13 +43,7 @@ const actions = {
           .then((user) => {
             commit('setLoading', false);
             commit('setUser', user.data);
-            if (user.data.admin_id) {
-              router.push({ path: '/dashboard/admin/' });
-            } else if (user.data.teacher_id) {
-              router.push({ path: '/dashboard/teacher/' });
-            } else {
-              router.push({ path: '/dashboard/parent/' });
-            }
+            dispatch('navigation/sendToDashboard', user.data, { root: true });
           }).catch((err) => {
             console.log(err);
           });
@@ -59,7 +55,7 @@ const actions = {
   logout({ commit }) {
     authAPI.logout()
       .then(() => {
-        commit('clearUser', '');
+        commit('clearUser');
         router.push({ path: '/' });
       }).catch((err) => {
         console.log(err);

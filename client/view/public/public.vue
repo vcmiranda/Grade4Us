@@ -1,15 +1,17 @@
 <template>
-  <v-container fluid ma-0 pa-0 class="background">
+  <v-container fluid ma-0 pa-0 fill-height>
     <v-layout row wrap>
       <v-flex xs12>
-        <topbar class="topbar"></topbar>
-        <v-card>
-          <v-card-media class="Bgd topbar" :src="getImage(bgImage)" height="100vh">
-            <v-content>
-              <router-view></router-view>
-            </v-content>
-          </v-card-media>
-        </v-card>
+        <topbar></topbar>
+        <v-layout>
+          <img
+            v-for="(image,i) in bgImages"
+            :src="getImage(image.src)"
+            :alt="image.src"
+            :class="image.class"
+            :key="i">
+          <router-view></router-view>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>
@@ -22,17 +24,14 @@ export default {
   components: {
     topbar,
   },
-  data() {
-    return {
-      bgImage: 'bgd1.jpg',
-      bgImages: [
-        'bgd2.jpg',
-        'bgd3.jpg',
-        'bgd4.jpg',
-        'bgd1.jpg',
-      ],
-    };
-  },
+  data: () => ({
+    bgImages: [
+      { src: 'bgd1.jpg', class: 'fixBgd img img1' },
+      { src: 'bgd2.jpg', class: 'fixBgd img img2' },
+      { src: 'bgd3.jpg', class: 'fixBgd img img3' },
+      { src: 'bgd4.jpg', class: 'fixBgd img img4' },
+    ],
+  }),
   created() {
     this.changeImage();
   },
@@ -54,35 +53,65 @@ export default {
 </script>
 
 <style scoped>
-  .topbar {
+  .fixBgd {
     position: fixed;
-    /* overflow: hidden; */
     top: 0;
     width: 100%;
   }
 
-  /* .Bgd .card__media__content {
-    min-height: 100vh;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
+  .img {
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-direction: alternate;
   }
 
-  .Bgd .card__media__content {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-  } */
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 1s ease-out;
+  .img1 {
+    animation-name: fade1;
   }
-  .fade-enter, .fade-leave-to {
-    opacity: 0.7;
-  }
-</style>
 
-<style>
-  .Bgd .card__media__background {
-    transition: background 1.5s linear;
+  .img2 {
+    animation-name: fade2;
+  }
+
+  .img3 {
+    animation-name: fade3;
+  }
+
+  .img4 {
+    animation-name: fade4;
+  }
+
+  @keyframes fade1 {
+    0% { opacity: 1; }
+    25% { opacity: 1; }
+    50% {opacity: 1 }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fade2 {
+    0% { opacity: 0; }
+    25% { opacity: 0; }
+    50% {opacity: 1 }
+    75% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fade3 {
+    0% { opacity: 1; }
+    25% { opacity: 1; }
+    50% {opacity: 1 }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes fade4 {
+    0% { opacity: 0; }
+    25% { opacity: 0; }
+    50% {opacity: 1 }
+    75% { opacity: 1; }
+    100% { opacity: 1; }
   }
 </style>
 

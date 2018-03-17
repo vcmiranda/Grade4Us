@@ -9,24 +9,25 @@ const state = {
 };
 
 const getters = {
-
 };
 
 const mutations = {
   toggleDrawer(state) {
     state.drawer = !state.drawer;
   },
-  // toggleLoginBtn(state) {
-  //   state.loginBtn = !state.loginBtn;
-  // },
-  toggleLoginForm(state) {
-    state.loginForm = !state.loginForm;
+  showLoginForm(state) {
+    state.loginForm = true;
+  },
+  hideLoginForm(state) {
+    state.loginForm = false;
   },
   showLoginBtn(state) {
     state.loginBtn = true;
+    localStorage.setItem('loginBtn', true);
   },
   hideLoginBtn(state) {
     state.loginBtn = false;
+    localStorage.setItem('loginBtn', false);
   },
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer dark fixed clipped app hide-overlay :value="drawer">
+  <v-navigation-drawer app :class="barColor" dark stateless hide-overlay :value="drawer">
     <v-list dense>
       <template v-for="item in menuItems">
         <v-layout row v-if="item.heading" align-center :key="item.heading" >
@@ -7,9 +7,6 @@
             <v-subheader v-if="item.heading">
               {{ item.heading }}
             </v-subheader>
-          </v-flex>
-          <v-flex xs6 class="text-xs-center">
-            <a href="#!" class="body-2 black--text">EDIT</a>
           </v-flex>
         </v-layout>
         <v-list-group v-else-if="item.children" v-model="item.model" :key="item.text" :prepend-icon="item.model ? item.icon : item['icon-alt']" append-icon="">
@@ -59,8 +56,16 @@ export default {
     ...mapState('auth', [
       'user',
     ]),
+    barColor() {
+      if (this.user.admin_id) {
+        return 'primary';
+      } else if (this.user.teacher_id) {
+        return 'accent';
+      }
+      return 'secondary';
+    },
     menuItems() {
-      const menuItems = [];
+      const menuItems = [{ heading: 'ROLES' }];
       if (this.user && this.user.admin_id) {
         menuItems.push({
           icon: 'keyboard_arrow_up',
@@ -73,7 +78,8 @@ export default {
             { icon: 'add', text: 'Manage Parents Accounts' },
           ],
         });
-      } else if (this.user && this.user.teacher_id) {
+      }
+      if (this.user && this.user.teacher_id) {
         menuItems.push({
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
@@ -84,7 +90,8 @@ export default {
             { icon: 'add', text: 'Manage Students' },
           ],
         });
-      } else if (this.user && this.user.parent_id) {
+      }
+      if (this.user && this.user.parent_id) {
         menuItems.push({
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
@@ -97,12 +104,17 @@ export default {
         });
       }
       menuItems.push(
+        { divider: true },
+        { heading: 'GENERAL' },
         { icon: 'settings', text: 'Settings' },
         { icon: 'chat_bubble', text: 'Send feedback' },
         { icon: 'help', text: 'Help' },
       );
       return menuItems;
     },
+  },
+  props: {
+    source: String,
   },
 };
 </script>
