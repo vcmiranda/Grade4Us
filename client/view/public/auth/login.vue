@@ -2,8 +2,8 @@
   <v-container fluid ma-0 pa-0 fill-height>
     <v-layout row wrap justify-center align-center>
       <v-flex xs10 sm6 md4 lg3 class="text-xs-center">
-        <v-alert type="error" dismissible class="ma-0" :value="alert" @click="clear">
-          {{ error ? error.message : '' }}
+        <v-alert :type="message ? message.type : 'success'" dismissible class="ma-0" :value="alert" @click="clear">
+          {{ message ? message.text : '' }}
         </v-alert>
         <v-card flat color="white" class="ma-0 pa-3">
           <span :class="classTxt">Login to Grade4Us</span>
@@ -16,7 +16,7 @@
                 <v-icon light>cached</v-icon>
               </span>
             </v-btn>
-            <v-btn block color="primary" class="my-3">Recover Password</v-btn>
+            <v-btn block color="primary" class="my-3" @click="sendUserFormReset">Reset Password</v-btn>
           </v-form>
         </v-card>
       </v-flex>
@@ -40,10 +40,10 @@ export default {
     ...mapState('auth', [
       'user',
       'loading',
-      'error',
+      'message',
     ]),
     alert() {
-      if (this.error) {
+      if (this.message) {
         return true;
       }
       return false;
@@ -58,13 +58,18 @@ export default {
   methods: {
     ...mapMutations('layout', [
       'showLoginBtn',
+      'showUserFormReset',
     ]),
     ...mapMutations('auth', [
-      'clearError',
+      'clearMessage',
     ]),
     ...mapActions('auth', [
       'login',
     ]),
+    sendUserFormReset() {
+      this.clearMessage();
+      this.showUserFormReset();
+    },
     loginUser() {
       this.showLoginBtn();
       this.login({
@@ -73,7 +78,7 @@ export default {
       });
     },
     clear() {
-      this.clearError();
+      this.clearMessage();
       this.credentials.password = null;
     },
   },

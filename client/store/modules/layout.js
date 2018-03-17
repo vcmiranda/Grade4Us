@@ -5,7 +5,7 @@
 const state = {
   drawer: true,
   loginBtn: true,
-  loginForm: false,
+  userForm: 0,
 };
 
 const getters = {
@@ -15,11 +15,14 @@ const mutations = {
   toggleDrawer(state) {
     state.drawer = !state.drawer;
   },
-  showLoginForm(state) {
-    state.loginForm = true;
+  hideUserFormLogin(state) {
+    state.userForm = 0;
   },
-  hideLoginForm(state) {
-    state.loginForm = false;
+  showUserFormLogin(state) {
+    state.userForm = 1;
+  },
+  showUserFormReset(state) {
+    state.userForm = 2;
   },
   showLoginBtn(state) {
     state.loginBtn = true;

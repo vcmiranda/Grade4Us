@@ -8,6 +8,9 @@ const auth = {
   logout() {
     return firebase.auth().signOut();
   },
+  resetPassword(user) {
+    return firebase.auth().sendPasswordResetEmail(user.email);
+  },
   getUser(firebaseUID) {
     return axios.post('/api/auth/login', { firebaseUID });
   },

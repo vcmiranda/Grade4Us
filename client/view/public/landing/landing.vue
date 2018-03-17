@@ -1,11 +1,14 @@
 <template>
   <v-container fluid ma-0 pa-0 fill-height align-center>
     <v-layout row wrap>
-      <v-flex v-if="!loginForm" xs12 text-xs-center :class="classTxt">
+      <v-flex v-if="userForm===0" xs12 text-xs-center :class="classTxt">
         {{ text.title }}
       </v-flex>
-      <v-flex v-else>
+      <v-flex v-else-if="userForm===1">
         <login></login>
+      </v-flex>
+      <v-flex v-else-if="userForm===2">
+        <reset></reset>
       </v-flex>
     </v-layout>
   </v-container>
@@ -15,10 +18,12 @@
 <script>
 import { mapState } from 'vuex';
 import Login from '../auth/login.vue';
+import Reset from '../auth/reset.vue';
 
 export default {
   components: {
     Login,
+    Reset,
   },
   data: () => ({
     text: {
@@ -27,7 +32,7 @@ export default {
   }),
   computed: {
     ...mapState('layout', [
-      'loginForm',
+      'userForm',
     ]),
     classTxt() {
       return {

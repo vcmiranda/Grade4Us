@@ -84,7 +84,7 @@ export default {
       'toggleDrawer',
       'showLoginBtn',
       'hideLoginBtn',
-      'hideLoginForm',
+      'hideUserFormLogin',
     ]),
     ...mapActions('auth', [
       'logout',
@@ -98,13 +98,13 @@ export default {
       /* eslint-enable */
     },
     sendHome() {
-      this.hideLoginForm();
+      this.hideUserFormLogin();
       this.hideLoginBtn();
       this.$router.push('/');
     },
     logoutUser() {
       this.showLoginBtn();
-      this.hideLoginForm();
+      this.hideUserFormLogin();
       this.logout();
     },
   },
