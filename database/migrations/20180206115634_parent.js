@@ -1,4 +1,4 @@
-exports.up = function (knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
     knex.schema.createTable('parent', (table) => {
       table.increments('parent_id').primary().unique().unsigned().notNullable();
@@ -8,7 +8,7 @@ exports.up = function (knex, Promise) {
   ]);
 };
 
-exports.down = function (knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('parent'),
   ]);

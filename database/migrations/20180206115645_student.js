@@ -1,4 +1,4 @@
-exports.up = function (knex, Promise) {
+exports.up = (knex, Promise) => {
   const date = Math.floor(new Date().getTime() / 1000);
   return Promise.all([
     knex.schema.createTable('student', (table) => {
@@ -17,7 +17,7 @@ exports.up = function (knex, Promise) {
   ]);
 };
 
-exports.down = function (knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('student'),
   ]);
