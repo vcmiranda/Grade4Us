@@ -40,5 +40,9 @@ module.exports = {
     'no-prototype-builtins': 0,
     'linebreak-style': 0,
     'no-console': 0,
+    'newline-per-chained-call': 0,
+    'arrow-body-style': 0,
+    'no-param-reassign': 0,
+    'no-unused-vars': 0,
   }
 }
