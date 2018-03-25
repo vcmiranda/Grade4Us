@@ -7,6 +7,7 @@ import Firebase from './scripts/firebase';
 import App from './view/App.vue';
 import router from './router/index';
 import store from './store/index';
+import PictureInput from 'vue-picture-input';
 
 Vue.use(
   Vuetify,
@@ -23,6 +24,8 @@ Vue.use(
   },
 );
 Vue.use(Firebase);
+
+Vue.component('pictureInput', PictureInput);
 
 Vue.config.productionTip = false;
 
