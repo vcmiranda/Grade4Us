@@ -4,7 +4,7 @@ const router = require('express').Router({ mergeParams: true });
 // // Handle all errors
 // router.use(require('../middleware/middle.error'));
 
-// router.use('/api/auth/', require('./routes.auth'));
+router.use('/api/auth/', require('./routes.auth'));
 
 // Routes that require auth
 // router.use('/api/admin/:admin_id', auth, require('./routes.admin'));

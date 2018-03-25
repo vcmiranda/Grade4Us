@@ -11,6 +11,7 @@ const getters = {
 const mutations = {
   setImages(state, data) {
     state.image = data;
+    console.log(data);
   },
 };
 
