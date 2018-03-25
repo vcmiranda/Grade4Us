@@ -6,6 +6,7 @@
     "firebase": "^4.11.0",
     "moment": "^2.21.0",
     "vue": "^2.5.16",
+    "vue-picture-input": "^2.1.5",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.8",
     "vuex": "^3.0.1"
