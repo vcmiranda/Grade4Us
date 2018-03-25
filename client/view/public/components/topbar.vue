@@ -1,11 +1,11 @@
 <template>
   <v-toolbar app class="elevation-10 transparent" dense fixed>
     <v-toolbar-title>
-      <img :src="getImage(logo)" @click="sendHome" :class="logoSize">
+      <img :src="getImage(logo)" @click="sendToHome" :class="logoSize">
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn v-if="loginBtn && $vuetify.breakpoint.smAndUp" color="transparent" dark class="elevation-0" @click="sendUserForm">Login</v-btn>
-    <v-btn v-if="loginBtn && $vuetify.breakpoint.xsOnly" color="white" dark class="elevation-0" @click="sendUserForm" flat icon>
+    <v-btn v-if="loginBtn && $vuetify.breakpoint.smAndUp" color="transparent" dark class="elevation-0" @click="sendLogin">Login</v-btn>
+    <v-btn v-if="loginBtn && $vuetify.breakpoint.xsOnly" color="white" dark class="elevation-0" @click="sendLogin" flat icon>
       <v-icon>mdi-login</v-icon>
     </v-btn>
     <v-menu v-else-if="!loginBtn" offset-y :close-on-content-click="false" v-model="menu">
@@ -74,8 +74,6 @@ export default {
   methods: {
     ...mapMutations('layout', [
       'showLoginBtn',
-      'showUserFormLogin',
-      'hideUserFormLogin',
     ]),
     ...mapMutations('auth', [
       'clearMessage',
@@ -85,23 +83,20 @@ export default {
     ]),
     ...mapActions('navigation', [
       'sendToDashboard',
+      'sendToLogin',
+      'sendToHome',
     ]),
     getImage(img) {
       /* eslint-disable */
       return require(`../../../assets/img/logo/${img}`);
       /* eslint-enable */
     },
-    sendUserForm() {
+    sendLogin() {
       this.clearMessage();
-      this.showUserFormLogin();
-    },
-    sendHome() {
-      this.$router.push('/');
-      this.hideUserFormLogin();
+      this.sendToLogin();
     },
     logoutUser() {
       this.showLoginBtn();
-      this.hideUserFormLogin();
       this.logout();
     },
   },

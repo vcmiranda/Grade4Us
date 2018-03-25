@@ -84,13 +84,13 @@ export default {
       'toggleDrawer',
       'showLoginBtn',
       'hideLoginBtn',
-      'hideUserFormLogin',
     ]),
     ...mapActions('auth', [
       'logout',
     ]),
     ...mapActions('navigation', [
       'sendToDashboard',
+      'sendToHome',
     ]),
     getImage(img) {
       /* eslint-disable */
@@ -98,13 +98,11 @@ export default {
       /* eslint-enable */
     },
     sendHome() {
-      this.hideUserFormLogin();
       this.hideLoginBtn();
-      this.$router.push('/');
+      this.sendToHome();
     },
     logoutUser() {
       this.showLoginBtn();
-      this.hideUserFormLogin();
       this.logout();
     },
   },

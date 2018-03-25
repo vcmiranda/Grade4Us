@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
 
-// import layoutAPI from '../../../api/layout.api';
+const userStorage = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 
 const state = {
   drawer: true,
-  loginBtn: true,
-  userForm: 0,
+  loginBtn: userStorage === null,
 };
 
 const getters = {
@@ -15,22 +14,11 @@ const mutations = {
   toggleDrawer(state) {
     state.drawer = !state.drawer;
   },
-  hideUserFormLogin(state) {
-    state.userForm = 0;
-  },
-  showUserFormLogin(state) {
-    state.userForm = 1;
-  },
-  showUserFormReset(state) {
-    state.userForm = 2;
-  },
   showLoginBtn(state) {
     state.loginBtn = true;
-    localStorage.setItem('loginBtn', true);
   },
   hideLoginBtn(state) {
     state.loginBtn = false;
-    localStorage.setItem('loginBtn', false);
   },
 };
 

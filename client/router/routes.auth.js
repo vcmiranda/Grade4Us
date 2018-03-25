@@ -1,16 +1,24 @@
 // Auth Pages
 import Login from '../view/public/auth/login.vue';
-// import Register from '../view/public/auth/register.vue';
+import Reset from '../view/public/auth/reset.vue';
 
 export default [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
+    meta: {
+      title: 'Login',
+      handlesAuth: true,
+    },
   },
-  // {
-  //   path: '/register',
-  //   name: 'Register',
-  //   component: Register,
-  // },
+  {
+    path: '/reset',
+    name: 'reset',
+    component: Reset,
+    meta: {
+      title: 'Reset',
+      handlesAuth: true,
+    },
+  },
 ];

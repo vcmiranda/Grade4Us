@@ -54,13 +54,15 @@ export default {
   methods: {
     ...mapMutations('layout', [
       'showLoginBtn',
-      'hideUserFormLogin',
     ]),
     ...mapMutations('auth', [
       'clearMessage',
     ]),
     ...mapActions('auth', [
       'resetPassword',
+    ]),
+    ...mapActions('navigation', [
+      'sendToLogin',
     ]),
     rstPassword() {
       this.showLoginBtn();
@@ -71,8 +73,8 @@ export default {
     clear() {
       if (this.message.type === 'success') {
         this.clearMessage();
-        this.hideUserFormLogin();
         this.$refs.form.reset();
+        this.sendToLogin();
       } else {
         this.clearMessage();
         this.$refs.form.reset();

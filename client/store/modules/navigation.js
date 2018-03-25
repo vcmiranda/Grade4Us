@@ -11,14 +11,25 @@ const mutations = {
 };
 
 const actions = {
-  sendToDashboard(user) {
+  sendToDashboard({ state }, user) {
     if (user.admin_id) {
       router.push({ path: '/dashboard/admin/' });
     } else if (user.teacher_id) {
       router.push({ path: '/dashboard/teacher/' });
-    } else {
+    } else if (user.parent_id) {
       router.push({ path: '/dashboard/parent/' });
+    } else {
+      router.push({ path: '/' });
     }
+  },
+  sendToHome() {
+    router.push({ path: '/' });
+  },
+  sendToLogin() {
+    router.push({ path: '/login' });
+  },
+  sendToReset() {
+    router.push({ path: '/reset' });
   },
 };
 

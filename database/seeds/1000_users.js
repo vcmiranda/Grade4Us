@@ -17,15 +17,9 @@ exports.seed = knex => knex('user').del()
   .then(() => knex('teacher').del())
   .then(() => knex('teacher').insert([
     { teacher_id: 1, user_id: 2 },
-    { teacher_id: 2, user_id: 4 },
-    { teacher_id: 3, user_id: 5 },
-    { teacher_id: 4, user_id: 6 },
   ]))
   .then(() => knex('parent').del())
   .then(() => knex('parent').insert([
     { parent_id: 1, user_id: 3 },
-    { parent_id: 2, user_id: 4 },
-    { parent_id: 3, user_id: 5 },
-    { parent_id: 4, user_id: 6 },
   ]));
 

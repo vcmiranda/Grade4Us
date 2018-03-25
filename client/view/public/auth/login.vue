@@ -16,7 +16,7 @@
                 <v-icon light>cached</v-icon>
               </span>
             </v-btn>
-            <v-btn block color="primary" class="my-3" @click="sendUserFormReset">Reset Password</v-btn>
+            <v-btn block color="primary" class="my-3" @click="sendReset">Reset Password</v-btn>
           </v-form>
         </v-card>
       </v-flex>
@@ -38,7 +38,6 @@ export default {
       'emailRules',
     ]),
     ...mapState('auth', [
-      'user',
       'loading',
       'message',
     ]),
@@ -58,7 +57,6 @@ export default {
   methods: {
     ...mapMutations('layout', [
       'showLoginBtn',
-      'showUserFormReset',
     ]),
     ...mapMutations('auth', [
       'clearMessage',
@@ -66,9 +64,12 @@ export default {
     ...mapActions('auth', [
       'login',
     ]),
-    sendUserFormReset() {
+    ...mapActions('navigation', [
+      'sendToReset',
+    ]),
+    sendReset() {
       this.clearMessage();
-      this.showUserFormReset();
+      this.sendToReset();
     },
     loginUser() {
       this.showLoginBtn();
