@@ -17,7 +17,7 @@
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile v-for="(child, i) in item.children" :key="i">
+          <v-list-tile v-for="(child, i) in item.children" :key="i" :to="child.path">
             <v-list-tile-action v-if="child.icon">
               <v-icon>{{ child.icon }}</v-icon>
             </v-list-tile-action>
@@ -103,7 +103,7 @@ export default {
           text: 'Parent Section',
           model: false,
           children: [
-            { icon: 'add', text: 'Manage Children' },
+            { icon: 'add', text: 'Manage Children', path: '/dashboard/parent/students' },
             { icon: 'add', text: 'Visualize Grades' },
           ],
         });

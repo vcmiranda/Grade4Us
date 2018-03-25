@@ -1,3 +1,6 @@
 <template>
-  <div>Teacher Dashboard</div>
+  <div>
+    <div>Teacher Dashboard</div>
+    <router-view></router-view>
+  </div>
 </template>
