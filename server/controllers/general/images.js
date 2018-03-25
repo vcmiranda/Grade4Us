@@ -27,7 +27,7 @@ module.exports = {
     });
     // upon reading file event
     form.on('fileBegin', (name, file) => {
-      file.path = `static/images/students/${studentID}.png`;
+      file.path = `/images/students/${studentID}.png`;
     });
     // upon reading field event
     form.on('field', (name, value) => {});

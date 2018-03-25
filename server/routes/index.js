@@ -1,8 +1,4 @@
-const express = require('express');
-
-const router = express.Router({ mergeParams: true });
-const path = require('path');
-
+const router = require('express').Router({ mergeParams: true });
 
 // const auth = require('../middleware/middle.auth');
 // // Handle all errors

@@ -2,7 +2,7 @@
 import imagesAPI from '../../api/images.api';
 
 const state = {
-  images: {},
+  image: {},
 };
 
 const getters = {
@@ -10,8 +10,7 @@ const getters = {
 
 const mutations = {
   setImages(state, data) {
-    state.images = data;
-    console.log(state.images);
+    state.image = data;
   },
 };
 

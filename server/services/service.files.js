@@ -5,6 +5,9 @@ const fse = require('fs-extra');
  */
 const files = {
   exists(path) {
+    console.log(path);
+
+    console.log(fse.pathExistsSync(path));
     return fse.pathExistsSync(path);
   },
 };

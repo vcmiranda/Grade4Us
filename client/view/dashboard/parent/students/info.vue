@@ -108,7 +108,7 @@ export default {
   },
   computed: {
     ...mapState('images', [
-      'images',
+      'image',
     ]),
   },
   methods: {
@@ -134,8 +134,8 @@ export default {
       this.children.forEach((child) => {
         this.getImageStudent({ studentID: child.studentID })
           .then(() => {
-            console.log(`${this.images.path}?${Math.floor(Math.random() * 100000000)}`);
-            child.image = `${this.images.path}?${Math.floor(Math.random() * 100000000)}`;
+            console.log(`${this.image.path}?${Math.floor(Math.random() * 100000000)}`);
+            child.image = `${this.image.path}?${Math.floor(Math.random() * 100000000)}`;
             console.log(child);
           });
       });
