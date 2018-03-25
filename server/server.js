@@ -30,6 +30,9 @@ app.use((req, res, next) => {
 });
 app.use(require('./routes'));
 
+// Added static folder
+app.use('/images', express.static(path.join(__dirname, 'static/images')));
+
 // Listen on port provided in config
 app.listen(process.env.WEB_PORT || 8081);
 logger.info(`Server started, listening on ${process.env.WEB_PORT || 8081}`);
