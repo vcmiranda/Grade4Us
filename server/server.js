@@ -25,13 +25,14 @@ app.use(morgan('combined', {
 // Express API
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 app.use(require('./routes'));
 
 // Added static folder
-app.use('/images', express.static(path.join(__dirname, 'static/images')));
+app.use('/images/', express.static(path.join(__dirname, 'static/images')));
 
 // Listen on port provided in config
 app.listen(process.env.WEB_PORT || 8081);
