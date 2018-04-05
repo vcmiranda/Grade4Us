@@ -11,6 +11,9 @@ router.use('/api/auth/', require('./routes.auth'));
 // router.use('/api/teacher/:teacher_id', auth, require('./routes.teacher'));
 // router.use('/api/parent/:parent_id', auth, require('./routes.parent'));
 
-router.use('/api/images/', require('./routes.images'));
+router.use('/api/images/', require('./general/routes.images'));
+router.use('/api/grades/', require('./general/routes.grades'));
+router.use('/api/courses/', require('./general/routes.courses'));
+
 
 module.exports = router;

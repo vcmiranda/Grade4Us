@@ -2,27 +2,22 @@
 import imagesAPI from '../../api/images.api';
 
 const state = {
-  image: {},
 };
 
 const getters = {
 };
 
 const mutations = {
-  setImages(state, data) {
-    state.image = data;
-    console.log(data);
-  },
 };
 
 const actions = {
-  getImageStudent({ commit }, data) {
-    imagesAPI.getImageStudent(data)
-      .then((ret) => {
-        commit('setImages', ret.data);
-      }).catch((err) => {
-        console.log(err);
-      });
+  getImageURLStudent({ commit }, data) {
+    return new Promise((success, error) => {
+      imagesAPI.getImageURLStudent(data)
+        .then((ret) => {
+          success(ret.data);
+        }).catch(error);
+    });
   },
 };
 

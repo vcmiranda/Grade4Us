@@ -11,7 +11,7 @@
               height="100"
               margin="16"
               accept="image/*"
-              :prefill="getImage(child.image || 'default.jpg')"
+              :prefill="getImage(child.image)"
               size="5"
               radius="50"
               :hideChangeButton="true"
@@ -45,13 +45,13 @@
                         full-width
                         :nudge-right="40"
                         min-width="290px"
-                        :return-value.sync="child.date_birthday"
+                        :return-value.sync="child.dateBirthday"
                       >
-                        <v-text-field slot="activator" label="Date of Birthday" :value="showDate(child.date_birthday)" prepend-icon="event" readonly required></v-text-field>
-                        <v-date-picker v-model="child.date_birthday" no-title scrollable>
+                        <v-text-field slot="activator" label="Date of Birthday" :value="showDate(child.dateBirthday)" prepend-icon="event" readonly required></v-text-field>
+                        <v-date-picker v-model="child.dateBirthday" no-title scrollable>
                           <v-spacer></v-spacer>
                           <v-btn flat color="primary" @click="child.menu = false">Cancel</v-btn>
-                          <v-btn flat color="primary" @click="$refs.menu[i].save(child.date_birthday)">OK</v-btn>
+                          <v-btn flat color="primary" @click="$refs.menu[i].save(child.dateBirthday)">OK</v-btn>
                         </v-date-picker>
                       </v-menu>
                     </v-flex>
@@ -59,7 +59,11 @@
                       <v-text-field label="Grade" v-model="child.grade" prepend-icon="school" readonly></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field label="Date of Enrollment" :value="showDate(child.date_enrolled)" prepend-icon="schedule" readonly></v-text-field>
+                      <v-text-field label="Date of Enrollment" :value="showDate(child.dateEnrolled)" prepend-icon="schedule" readonly></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 text-xs-right>
+                      <v-btn color="red" class="white--text">Cancel</v-btn>
+                      <v-btn color="green" class="white--text">Save</v-btn>
                     </v-flex>
                   </v-layout>
                 </v-form>
@@ -74,7 +78,8 @@
 
 <script>
 import convert from '../../../../utils/moment.utils';
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
   data: () => ({
     valid: false,
@@ -84,40 +89,35 @@ export default {
         firstname: 'Nathalia',
         lastname: 'Miranda',
         email: 'nscmiranda@outlook.com',
-        date_birthday: '',
+        dateBirthday: '',
         grade: 5,
-        date_enrolled: '2016-09-06',
+        dateEnrolled: '2016-09-06',
         menu: false,
-        image: null,
+        image: 'default.jpg',
       },
       {
         studentID: 2,
         firstname: 'Guilherme',
         lastname: 'Miranda',
         email: 'gccmiranda@outlook.com',
-        date_birthday: '',
+        dateBirthday: '',
         grade: 12,
-        date_enrolled: '2016-09-06',
+        dateEnrolled: '2016-09-06',
         menu: false,
-        image: null,
+        image: '1.png',
       },
     ],
   }),
   created() {
     this.fetchImg();
   },
-  computed: {
-    ...mapState('images', [
-      'image',
-    ]),
-  },
   methods: {
     ...mapActions('images', [
-      'getImageStudent',
+      'getImageURLStudent',
     ]),
     getImage(img) {
       /* eslint-disable */
-      return require(`../../../../assets/img/${img}`);
+      return require(`../../../../images/students/${img}`);
       /* eslint-enable */
     },
     showDate(date) {
@@ -132,11 +132,10 @@ export default {
     },
     fetchImg() {
       this.children.forEach((child) => {
-        this.getImageStudent({ studentID: child.studentID })
-          .then(() => {
-            console.log(`${this.image.path}?${Math.floor(Math.random() * 100000000)}`);
-            child.image = `${this.image.path}?${Math.floor(Math.random() * 100000000)}`;
-            console.log(child);
+        this.getImageURLStudent({ studentID: child.studentID })
+          .then((ret) => {
+            console.log(ret);
+            child.image = ret.path;
           });
       });
     },

@@ -1,14 +1,11 @@
-const fse = require('fs-extra');
+const fs = require('fs');
 
 /**
  * exists, check if target image exists, return boolean
  */
 const files = {
   exists(path) {
-    console.log(path);
-
-    console.log(fse.pathExistsSync(path));
-    return fse.pathExistsSync(path);
+    return fs.existsSync(path);
   },
 };
 

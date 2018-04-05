@@ -91,7 +91,7 @@ export default {
           text: 'Teacher Section',
           model: false,
           children: [
-            { icon: 'add', text: 'Manage Classes' },
+            { icon: 'add', text: 'Manage Classes', path: '/dashboard/teacher/courses' },
             { icon: 'add', text: 'Manage Students' },
           ],
         });

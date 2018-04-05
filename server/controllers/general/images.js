@@ -2,19 +2,22 @@
 
 const formidable = require('formidable');
 const template = require('../../services/service.files');
-// const fse = require('fs-extra');
-// const fs = require('fs');
-// const path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 
 module.exports = {
-  getImageStudent(req, res) {
-    const filePath = `/images/students/${req.headers.studentid}.png`;
+  getImageURLStudent(req, res) {
+    const basePath = '../../static/images/students/';
+    const fileName = `${req.headers.studentid}.png`;
+    const filePath = path.join(__dirname, basePath, fileName);
+    const returnPath = path.join('/images/students/', fileName);
 
-    if (template.exists(`static${filePath}`)) {
-      res.json({ filePath, studentID: req.headers.studentid });
+
+    if (template.exists(filePath)) {
+      res.json({ path: returnPath, studentID: req.headers.studentid });
     } else {
-      const defaultPath = '/images/students/default.jpg';
+      const defaultPath = { path: '/images/students/default.jpg', studentID: req.headers.studentid };
       res.json(defaultPath);
     }
   },

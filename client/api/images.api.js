@@ -1,8 +1,8 @@
 import axios from '../scripts/axios';
 
 const auth = {
-  getImageStudent(student) {
-    return axios.get('/api/images/getImageStudent', {
+  getImageURLStudent(student) {
+    return axios.get('/api/images/getImageURLStudent', {
       headers: { studentid: student.studentID },
     });
   },
