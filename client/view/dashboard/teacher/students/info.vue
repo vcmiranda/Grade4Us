@@ -62,37 +62,36 @@ import { mapState, mapActions } from 'vuex';
 export default {
   data: () => ({
     valid: false,
-    
-      dialog: false,
-      headers: [
-        {
-          text: 'Full name',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Birth date', value: 'birthDate' },
-        { text: 'Email', value: 'email' },
-        { text: 'Student ID', value: 'studentId' },
-        { text: 'Date enrolled', value: 'dateEnrolled' },
-        { text: 'Actions', value: 'name', sortable: false }
-      ],
-      items: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        calories: 0,
-        email: 0,
-        studentId: 0,
-        dateEnrolled: 0
+    dialog: false,
+    headers: [
+      {
+        text: 'Full name',
+        align: 'left',
+        sortable: false,
+        value: 'name'
       },
-      defaultItem: {
-        name: '',
-        calories: 0,
-        email: 0,
-        studentId: 0,
-        dateEnrolled: 0
-      }    
+      { text: 'Birth date', value: 'birthDate' },
+      { text: 'Email', value: 'email' },
+      { text: 'Student ID', value: 'studentId' },
+      { text: 'Date enrolled', value: 'dateEnrolled' },
+      { text: 'Actions', value: 'name', sortable: false }
+    ],
+    items: [],
+    editedIndex: -1,
+    editedItem: {
+      name: '',
+      birthDate: 0,
+      email: 0,
+      studentId: 0,
+      dateEnrolled: 0
+    },
+    defaultItem: {
+      name: '',
+      birthDate: 0,
+      email: 0,
+      studentId: 0,
+      dateEnrolled: 0
+    }
   }),
   mounted() {
     this.listGrade();
@@ -107,17 +106,17 @@ export default {
       'courses',
     ]),
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Grades';
     }
   },
   watch: {
-      dialog (val) {
-        val || this.close();
-      }
-    },
+    dialog (val) {
+      val || this.close();
+    }
+  },
   created () {
-      this.initialize();
-    },
+    this.initialize();
+  },
   methods: {
     // getImage(img) {
     //   /* eslint-disable */
@@ -136,103 +135,100 @@ export default {
     print(course) {
       console.log(course);
     },
-     initialize () {
-        this.items = [
-          {
-            name: 'Frozen Yogurt',
-            birthDate: 159,
-            email: 6.0,
-            studentId: 24,
-            dateEnrolled: 4.0
-          },
-          {
-            name: 'Ice cream sandwich',
-            birthDate: 237,
-            email: 9.0,
-            studentId: 37,
-            dateEnrolled: 4.3
-          },
-          {
-            name: 'Eclair',
-            birthDate: 262,
-            email: 16.0,
-            studentId: 23,
-            dateEnrolled: 6.0
-          },
-          {
-            name: 'Cupcake',
-            birthDate: 305,
-            email: 3.7,
-            studentId: 67,
-            dateEnrolled: 4.3
-          },
-          {
-            name: 'Gingerbread',
-            birthDate: 356,
-            email: 16.0,
-            studentId: 49,
-            dateEnrolled: 3.9
-          },
-          {
-            name: 'Jelly bean',
-            birthDate: 375,
-            email: 0.0,
-            studentId: 94,
-            dateEnrolled: 0.0
-          },
-          {
-            name: 'Lollipop',
-            birthDate: 392,
-            email: 0.2,
-            studentId: 98,
-            dateEnrolled: 0
-          },
-          {
-            name: 'Honeycomb',
-            birthDate: 408,
-            email: 3.2,
-            studentId: 87,
-            dateEnrolled: 6.5
-          },
-          {
-            name: 'Donut',
-            birthDate: 452,
-            email: 25.0,
-            studentId: 51,
-            dateEnrolled: 4.9
-          },
-          {
-            name: 'KitKat',
-            birthDate: 518,
-            email: 26.0,
-            studentId: 65,
-            dateEnrolled: 7
-          }
-        ]
-      },
-
-      editItem (item) {
-        this.editedIndex = this.items.indexOf(item);
-        this.editedItem = Object.assign({}, item);
-        this.dialog = true;
-      },
-
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem);
-          this.editedIndex = -1;
-        }, 300)
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.items[this.editedIndex], this.editedItem);
-        } else {
-          this.items.push(this.editedItem);
+    initialize () {
+      this.items = [
+        {
+          name: 'Frozen Yogurt',
+          birthDate: 159,
+          email: 6.0,
+          studentId: 24,
+          dateEnrolled: 4.0
+        },
+        {
+          name: 'Ice cream sandwich',
+          birthDate: 237,
+          email: 9.0,
+          studentId: 37,
+          dateEnrolled: 4.3
+        },
+        {
+          name: 'Eclair',
+          birthDate: 262,
+          email: 16.0,
+          studentId: 23,
+          dateEnrolled: 6.0
+        },
+        {
+          name: 'Cupcake',
+          birthDate: 305,
+          email: 3.7,
+          studentId: 67,
+          dateEnrolled: 4.3
+        },
+        {
+          name: 'Gingerbread',
+          birthDate: 356,
+          email: 16.0,
+          studentId: 49,
+          dateEnrolled: 3.9
+        },
+        {
+          name: 'Jelly bean',
+          birthDate: 375,
+          email: 0.0,
+          studentId: 94,
+          dateEnrolled: 0.0
+        },
+        {
+          name: 'Lollipop',
+          birthDate: 392,
+          email: 0.2,
+          studentId: 98,
+          dateEnrolled: 0
+        },
+        {
+          name: 'Honeycomb',
+          birthDate: 408,
+          email: 3.2,
+          studentId: 87,
+          dateEnrolled: 6.5
+        },
+        {
+          name: 'Donut',
+          birthDate: 452,
+          email: 25.0,
+          studentId: 51,
+          dateEnrolled: 4.9
+        },
+        {
+          name: 'KitKat',
+          birthDate: 518,
+          email: 26.0,
+          studentId: 65,
+          dateEnrolled: 7
         }
-        this.close();
+      ]
+    },
+    editItem (item) {
+     this.editedIndex = this.items.indexOf(item);
+     this.editedItem = Object.assign({}, item);
+     this.dialog = true;
+    },
+    close () {
+     this.dialog = false
+     setTimeout(() => {
+       this.editedItem = Object.assign({}, this.defaultItem);
+       this.editedIndex = -1;
+     }, 300)
+    },
+    save () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.items[this.editedIndex], this.editedItem);
+      } else {
+        this.items.push(this.editedItem);
       }
+      this.close();
+    }
   },
 };
 </script>
