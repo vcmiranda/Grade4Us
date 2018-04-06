@@ -92,7 +92,7 @@ export default {
           model: false,
           children: [
             { icon: 'add', text: 'Manage Classes', path: '/dashboard/teacher/courses' },
-            { icon: 'add', text: 'Manage Students' },
+            { icon: 'add', text: 'Manage Students', path: '/dashboard/teacher/students' },
           ],
         });
       }
