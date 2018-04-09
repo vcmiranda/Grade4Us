@@ -1,5 +1,6 @@
 import Dashboard from '../view/dashboard/admin/overview.vue';
-import CourseInfo from '../view/dashboard/admin/courses.vue';
+import CourseInfo from '../view/dashboard/admin/courses/courses.vue';
+import CourseStudents from '../view/dashboard/admin/courses/students.vue';
 import TeacherInfo from '../view/dashboard/admin/teachers.vue';
 import StudentInfo from '../view/dashboard/admin/students.vue';
 
@@ -16,12 +17,34 @@ export default [
     children: [
       {
         path: 'courses',
-        component: CourseInfo,
+        component: Dashboard,
         meta: {
           title: 'Course Info',
           requiresAuth: true,
           name: 'admin',
         },
+        children: [
+          {
+            path: '/',
+            name: 'adminCourses',
+            component: CourseInfo,
+            meta: {
+              title: 'Course Info',
+              requiresAuth: true,
+              name: 'admin',
+            },
+          },
+          {
+            path: 'students',
+            name: 'adminCourseStudents',
+            component: CourseStudents,
+            meta: {
+              title: 'Students in Course',
+              requiresAuth: true,
+              name: 'admin',
+            },
+          },
+        ],
       },
       {
         path: 'teachers',

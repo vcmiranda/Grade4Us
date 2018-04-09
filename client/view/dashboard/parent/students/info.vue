@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import convert from '../../../../utils/moment.utils';
+import utils from '../../../../utils/moment.utils';
 import { mapActions } from 'vuex';
 
 export default {
@@ -121,7 +121,7 @@ export default {
       /* eslint-enable */
     },
     showDate(date) {
-      return convert.convertInverseToFormattedDate(date);
+      return utils.convertInverseToFormattedDate(date);
     },
     saveImage(image) {
       if (image) {

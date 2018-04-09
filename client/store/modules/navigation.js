@@ -31,6 +31,9 @@ const actions = {
   sendToReset() {
     router.push({ path: '/reset' });
   },
+  sendToNamedRoute({ state }, data) {
+    router.push({ name: data.routeName, params: data.course });
+  },
 };
 
 export default {
