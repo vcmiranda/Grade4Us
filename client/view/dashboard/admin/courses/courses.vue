@@ -1,5 +1,5 @@
 <template>
-  <v-container mb-3>
+  <v-container fluid>
     <v-toolbar dense flat>
       <v-btn color='primary' dark @click="createItem">Add Course
         <v-icon dark right>add</v-icon>
@@ -11,7 +11,7 @@
       </v-btn>
     </v-toolbar>
 
-    <v-data-table :headers="headers" :items="items" class="elevation-1" :pagination.sync="pagination" :search="search">
+    <v-data-table :headers="headers" :items="items" :pagination.sync="pagination" :search="search">
       <template slot="items" slot-scope="props">
         <td class="text-xs-center">{{ props.item.course_id }}</td>
         <td class="text-xs-center">{{ props.item.course_code }}</td>

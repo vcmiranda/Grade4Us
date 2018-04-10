@@ -1,5 +1,5 @@
 <template>
- <v-container fluid grid-list-md>
+ <v-container fluid>
    <v-toolbar dense flat>
       <v-btn color='primary' dark @click="addItem">Add Student
         <v-icon dark right>add</v-icon>
@@ -20,7 +20,7 @@
       :pagination.sync="pagination"
       :search="search"
     >
-      <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3>
+      <v-flex slot="item" slot-scope="props" xs12 sm6 md4 lg3 pa-1>
         <v-card>
           <v-card-title>
             <v-toolbar dense class="elevation-0">

@@ -1,5 +1,5 @@
 <template>
-  <v-container mb-3>
+  <v-container fluid>
     <v-toolbar dense flat>
       <v-btn color='primary' dark @click="createItem">Add Student
         <v-icon dark right>add</v-icon>
@@ -11,7 +11,7 @@
       </v-btn>
     </v-toolbar>
 
-    <v-data-table :headers="headers" :items="items" class="elevation-1" :pagination.sync="pagination" :search="search">
+    <v-data-table :headers="headers" :items="items" :pagination.sync="pagination" :search="search">
       <template slot="items" slot-scope="props">
         <td class="text-xs-center">{{ props.item.student_id }}</td>
         <td class="text-xs-center">{{ props.item.firstname }}</td>
@@ -31,76 +31,93 @@
       </template>
     </v-data-table>
 
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="600px">
       <v-card>
         <v-card-title>
           <span class="headline">{{ formTitle }}</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12>
-                <v-text-field label="First Name" v-model="editedItem.firstname"></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Last Name" v-model="editedItem.lastname"></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Email" v-model="editedItem.email"></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-menu
-                  ref="menu"
-                  lazy
-                  :close-on-content-click="false"
-                  v-model="menuBirthday"
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  :nudge-right="40"
-                  min-width="290px"
-                  :return-value.sync="editedItem.date_birthday"
+          <v-layout row wrap>
+            <v-flex xs12 px-2>
+              <v-toolbar dense color="blue" class="white--text">
+                <v-toolbar-title>Personal</v-toolbar-title>
+              </v-toolbar>
+            </v-flex>
+            <v-flex xs6 px-2>
+              <v-text-field label="First Name" v-model="editedItem.firstname" prepend-icon="fas fa-user"></v-text-field>
+            </v-flex>
+            <v-flex xs6 px-2>
+              <v-text-field label="Last Name" v-model="editedItem.lastname" prepend-icon="far fa-user"></v-text-field>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-text-field label="Email" v-model="editedItem.email" prepend-icon="email"></v-text-field>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-menu
+                ref="menu"
+                lazy
+                :close-on-content-click="false"
+                v-model="menuBirthday"
+                transition="scale-transition"
+                offset-y
+                full-width
+                :nudge-right="40"
+                min-width="290px"
+                :return-value.sync="editedItem.date_birthday"
+              >
+                <v-text-field slot="activator" label="Date of Birthday" :value="showDate(editedItem.date_birthday)" prepend-icon="event" readonly></v-text-field>
+                <v-date-picker
+                  ref="picker"
+                  v-model="editedItem.date_birthday"
+                  @change="save"
+                  min="2000-01-01"
+                  :max="new Date().toISOString().substr(0, 10)"
                 >
-                  <v-text-field slot="activator" label="Date of Birthday" :value="showDate(editedItem.date_birthday)" prepend-icon="event" readonly></v-text-field>
-                  <v-date-picker
-                    ref="picker"
-                    v-model="editedItem.date_birthday"
-                    @change="save"
-                    min="2000-01-01"
-                    :max="new Date().toISOString().substr(0, 10)"
-                  >
-                  </v-date-picker>
-                </v-menu>
-              </v-flex>
-              <v-flex xs12>
-                <v-menu
-                  ref="menu"
-                  lazy
-                  :close-on-content-click="false"
-                  v-model="menuEnrollment"
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  :nudge-right="40"
-                  min-width="290px"
-                  :return-value.sync="editedItem.date_enrolled"
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-menu
+                ref="menu"
+                lazy
+                :close-on-content-click="false"
+                v-model="menuEnrollment"
+                transition="scale-transition"
+                offset-y
+                full-width
+                :nudge-right="40"
+                min-width="290px"
+                :return-value.sync="editedItem.date_enrolled"
+              >
+                <v-text-field slot="activator" label="Date of Enrollment" :value="showDate(editedItem.date_enrolled)" prepend-icon="event" readonly></v-text-field>
+                <v-date-picker
+                  ref="picker"
+                  v-model="editedItem.date_enrolled"
+                  @change="save"
+                  min="2000-01-01"
+                  :max="new Date().toISOString().substr(0, 10)"
                 >
-                  <v-text-field slot="activator" label="Date of Birthday" :value="showDate(editedItem.date_enrolled)" prepend-icon="event" readonly></v-text-field>
-                  <v-date-picker
-                    ref="picker"
-                    v-model="editedItem.date_enrolled"
-                    @change="save"
-                    min="2000-01-01"
-                    :max="new Date().toISOString().substr(0, 10)"
-                  >
-                  </v-date-picker>
-                </v-menu>
-              </v-flex>
-              <v-flex xs12>
-                <v-switch label="Current Student?" v-model="editedItem.current_student"></v-switch>
-              </v-flex>
-            </v-layout>
-          </v-container>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-toolbar dense color="blue" class="white--text">
+                <v-toolbar-title>Parent / Guardian</v-toolbar-title>
+              </v-toolbar>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-text-field label="First Name" v-model="editedItem.resp_lastname" prepend-icon="fas fa-user"></v-text-field>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-text-field label="Last Name" v-model="editedItem.resp_lastname" prepend-icon="fas fa-user"></v-text-field>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-text-field label="Email" v-model="editedItem.resp_email" prepend-icon="email"></v-text-field>
+            </v-flex>
+            <v-flex xs12 px-2>
+              <v-switch label="Current Student?" v-model="editedItem.current_student"></v-switch>
+            </v-flex>
+          </v-layout>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -142,6 +159,9 @@ export default {
         date_birthday: '2007-09-06',
         email: 'jm@jm.ca',
         date_enrolled: '2016-09-06',
+        resp_firstname: 'Erin',
+        resp_lastname: 'Malkovich',
+        resp_email: 'emalkovich@em.ca',
         current_student: false,
       },
       {
@@ -151,6 +171,9 @@ export default {
         date_birthday: '2008-02-17',
         email: 'mb@mb.ca',
         date_enrolled: '2016-10-06',
+        resp_firstname: 'Tiki',
+        resp_lastname: 'Burnett',
+        resp_email: 'tBurnett@tb.ca',
         current_student: true,
       },
       {
@@ -160,6 +183,9 @@ export default {
         date_birthday: '2007-11-01',
         email: 'ts@ts.com',
         date_enrolled: '2016-11-06',
+        resp_firstname: 'Bob',
+        resp_lastname: 'Smith',
+        resp_email: 'bsmith@bs.ca',
         current_student: true,
       },
     ],
@@ -170,6 +196,9 @@ export default {
       date_birthday: '',
       email: '',
       date_enrolled: '',
+      resp_firstname: '',
+      resp_lastname: '',
+      resp_email: '',
       current_student: '',
     },
   }),
@@ -197,6 +226,9 @@ export default {
         date_birthday: student.date_birthday,
         email: student.email,
         date_enrolled: student.date_enrolled,
+        resp_firstname: student.resp_firstname,
+        resp_lastname: student.resp_lastname,
+        resp_email: student.resp_email,
         current_student: student.current_student,
       };
     },
@@ -214,6 +246,9 @@ export default {
         this.items[this.editedItem.index].date_birthday = this.editedItem.date_birthday;
         this.items[this.editedItem.index].email = this.editedItem.email;
         this.items[this.editedItem.index].date_enrolled = this.editedItem.date_enrolled;
+        this.items[this.editedItem.index].resp_firstname = this.editedItem.resp_firstname;
+        this.items[this.editedItem.index].resp_lastname = this.editedItem.resp_lastname;
+        this.items[this.editedItem.index].resp_email = this.editedItem.resp_email;
         this.items[this.editedItem.index].current_student = this.editedItem.current_student;
       } else {
         this.items.push(this.editedItem);
