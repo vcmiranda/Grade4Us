@@ -1,6 +1,6 @@
 import Dashboard from '../view/dashboard/teacher/overview.vue';
 import CourseInfo from '../view/dashboard/teacher/courses/info.vue';
-import StudentInfo from '../view/dashboard/teacher/students/info.vue';
+import ReportsInfo from '../view/dashboard/teacher/reports/info.vue';
 
 export default [
   {
@@ -23,10 +23,10 @@ export default [
         },
       },
       {
-        path: 'students',
-        component: StudentInfo,
+        path: 'reports',
+        component: ReportsInfo,
         meta: {
-          title: 'Student Info',
+          title: 'Reports Info',
           requiresAuth: true,
           name: 'teacher',
         },

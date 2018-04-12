@@ -69,15 +69,14 @@ export default {
             { icon: 'add', text: 'Manage Teachers Accounts', path: '/dashboard/admin/teachers' },
             { icon: 'add', text: 'Manage Courses Accounts', path: '/dashboard/admin/courses' },
             { icon: 'add', text: 'Manage Students Accounts', path: '/dashboard/admin/students' },
-            { icon: 'add', text: 'Manage Parents Accounts' },
           ],
         });
       }
       if (this.user && this.user.teacher_id) {
         menuItems.push({
           children: [
-            { icon: 'add', text: 'Manage Classes', path: '/dashboard/teacher/courses' },
-            { icon: 'add', text: 'Manage Students', path: '/dashboard/teacher/students' },
+            { icon: 'add', text: 'Manage Courses', path: '/dashboard/teacher/courses' },
+            { icon: 'add', text: 'Manage Report Cards', path: '/dashboard/teacher/reports' },
           ],
         });
       }
@@ -85,7 +84,7 @@ export default {
         menuItems.push({
           children: [
             { icon: 'add', text: 'Manage Children', path: '/dashboard/parent/students' },
-            { icon: 'add', text: 'Visualize Grades' },
+            { icon: 'add', text: 'Visualize Report Cards', path: '/dashboard/parent/reports' },
           ],
         });
       }
