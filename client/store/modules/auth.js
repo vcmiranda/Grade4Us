@@ -86,6 +86,14 @@ const actions = {
         });
     }
   },
+  updateUser({ commit }, data) {
+    authAPI.updateUser(data)
+      .then(() => {
+        commit('setUser', data);
+      }).catch((err) => {
+        console.log(err);
+      });
+  },
 };
 
 export default {

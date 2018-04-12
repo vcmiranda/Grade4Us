@@ -14,6 +14,9 @@ const auth = {
   getUser(firebaseUID) {
     return axios.post('/api/auth/login', { firebaseUID });
   },
+  updateUser(user) {
+    return axios.post('/api/auth/updateUser', user);
+  },
 };
 
 export default auth;

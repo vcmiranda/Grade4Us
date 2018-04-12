@@ -34,8 +34,8 @@ export default {
   data: () => ({
   }),
   created() {
-    if (this.$vuetify.breakpoint.xsOnly) {
-      this.toggleDrawer();
+    if (this.$vuetify.breakpoint.xsOnly || this.user.parent_id) {
+      this.closeDrawer();
     }
   },
   computed: {
@@ -88,18 +88,13 @@ export default {
           ],
         });
       }
-      menuItems.push(
-        // { divider: true },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Send feedback' },
-        { icon: 'help', text: 'Help' },
-      );
       return menuItems;
     },
   },
   methods: {
     ...mapMutations('layout', [
       'toggleDrawer',
+      'closeDrawer',
     ]),
   },
 };

@@ -12,6 +12,7 @@ module.exports = {
       .leftJoin('parent', 'user.user_id', 'parent.user_id')
       .where(filter)
       .select(
+        'user.user_id',
         'user.email',
         'user.firstname',
         'user.lastname',
@@ -33,5 +34,15 @@ module.exports = {
       .leftJoin('parent', 'user.user_id', 'parent.user_id')
       .whereNotNull(filter)
       .select('user.*', 'admin.admin_id', 'teacher.teacher_id', 'parent.parent_id');
+  },
+  /**
+   * @desc updates user
+   * @param {filter} JSON filter user that will be updated
+   * @param {data} JSON info that will be updated
+  */
+  update(filter, data) {
+    return knex('user')
+      .where(filter)
+      .update(data);
   },
 };

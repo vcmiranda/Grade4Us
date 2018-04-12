@@ -28,7 +28,7 @@ export default [
         meta: {
           title: 'Reports Info',
           requiresAuth: true,
-          name: 'teacher',
+          name: 'parent',
         },
       },
     ],

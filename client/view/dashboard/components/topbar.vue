@@ -1,6 +1,6 @@
 <template>
   <v-toolbar app :color="barColor" class="elevation-10" dense fixed clipped-left>
-    <v-toolbar-side-icon dark @click.stop="toggleDrawer"></v-toolbar-side-icon>
+    <v-toolbar-side-icon v-if="!user.parent_id" dark @click.stop="toggleDrawer"></v-toolbar-side-icon>
     <v-toolbar-title>
       <img :src="getImage(logo)" @click="sendHome" :class="logoSize">
     </v-toolbar-title>
@@ -22,13 +22,13 @@
         </v-list>
         <v-divider></v-divider>
         <v-list class="pb-0 pt-0">
-          <v-list-tile @click="sendToDashboard(user)">
+          <v-list-tile @click="openDashboard">
             <v-list-tile-action>
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>My Dashboard</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile @click="openProfile">
             <v-list-tile-action>
               <v-icon>mdi-account</v-icon>
             </v-list-tile-action>
@@ -84,6 +84,7 @@ export default {
       'toggleDrawer',
       'showLoginBtn',
       'hideLoginBtn',
+      'toggleProfile',
     ]),
     ...mapActions('auth', [
       'logout',
@@ -101,9 +102,18 @@ export default {
       this.hideLoginBtn();
       this.sendToHome();
     },
+    openDashboard() {
+      this.sendToDashboard(this.user);
+      this.menu = false;
+    },
+    openProfile() {
+      this.toggleProfile();
+      this.menu = false;
+    },
     logoutUser() {
       this.showLoginBtn();
       this.logout();
+      this.menu = false;
     },
   },
   props: {
