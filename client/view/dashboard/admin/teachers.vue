@@ -36,18 +36,23 @@
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12>
-                <v-text-field label="First Name" v-model="editedItem.firstname"></v-text-field>
+            <v-layout row wrap>
+              <v-flex xs12 px-2>
+                <v-toolbar dense color="blue" class="white--text">
+                  <v-toolbar-title>General Information</v-toolbar-title>
+                </v-toolbar>
               </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Last Name" v-model="editedItem.lastname"></v-text-field>
+              <v-flex xs12 px-2 pt-3>
+                <v-text-field label="First Name" v-model="editedItem.firstname" prepend-icon="fas fa-user"></v-text-field>
               </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Email" v-model="editedItem.email"></v-text-field>
+              <v-flex xs12 px-2>
+                <v-text-field label="Last Name" v-model="editedItem.lastname" prepend-icon="far fa-user"></v-text-field>
               </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Phone" v-model="editedItem.phone"></v-text-field>
+              <v-flex xs12 px-2>
+                <v-text-field label="Email" v-model="editedItem.email" prepend-icon="email"></v-text-field>
+              </v-flex>
+              <v-flex xs12 px-2>
+                <v-text-field label="Phone" v-model="editedItem.phone" prepend-icon="fa-phone"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>

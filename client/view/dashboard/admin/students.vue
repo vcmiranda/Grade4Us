@@ -43,16 +43,16 @@
                 <v-toolbar-title>Personal</v-toolbar-title>
               </v-toolbar>
             </v-flex>
-            <v-flex xs6 px-2>
+            <v-flex xs6 px-2 pt-3>
               <v-text-field label="First Name" v-model="editedItem.firstname" prepend-icon="fas fa-user"></v-text-field>
             </v-flex>
-            <v-flex xs6 px-2>
+            <v-flex xs6 px-2 pt-3>
               <v-text-field label="Last Name" v-model="editedItem.lastname" prepend-icon="far fa-user"></v-text-field>
             </v-flex>
             <v-flex xs12 px-2>
               <v-text-field label="Email" v-model="editedItem.email" prepend-icon="email"></v-text-field>
             </v-flex>
-            <v-flex xs12 px-2>
+            <v-flex xs6 px-2>
               <v-menu
                 ref="menu"
                 lazy
@@ -76,7 +76,7 @@
                 </v-date-picker>
               </v-menu>
             </v-flex>
-            <v-flex xs12 px-2>
+            <v-flex xs6 px-2>
               <v-menu
                 ref="menu"
                 lazy
@@ -105,11 +105,11 @@
                 <v-toolbar-title>Parent / Guardian</v-toolbar-title>
               </v-toolbar>
             </v-flex>
-            <v-flex xs12 px-2>
+            <v-flex xs6 px-2 pt-3>
               <v-text-field label="First Name" v-model="editedItem.resp_lastname" prepend-icon="fas fa-user"></v-text-field>
             </v-flex>
-            <v-flex xs12 px-2>
-              <v-text-field label="Last Name" v-model="editedItem.resp_lastname" prepend-icon="fas fa-user"></v-text-field>
+            <v-flex xs6 px-2 pt-3>
+              <v-text-field label="Last Name" v-model="editedItem.resp_lastname" prepend-icon="far fa-user"></v-text-field>
             </v-flex>
             <v-flex xs12 px-2>
               <v-text-field label="Email" v-model="editedItem.resp_email" prepend-icon="email"></v-text-field>
