@@ -22,7 +22,14 @@ module.exports = {
         'parent.parent_id',
       );
   },
-
+    /**
+   * @desc inserts a new user into the database
+   * @param {data} JSON Info related to the user
+  */
+  create(data) {
+    return knex('user')
+      .insert(data);
+  },
   /**
    * @desc returns a list of filtered users
    * @param {filter} JSON Filters the search. eg { parent.parent_id != null }

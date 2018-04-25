@@ -1,10 +1,10 @@
 const router = require('express').Router({ mergeParams: true });
 
-// const teacher = require('../controllers/teacher');
+const teacher = require('../controllers/teacher/teacher');
 
 // // Group API
-// router.get('/group/', teacher.group.getList);
-// router.get('/group/:group_id/', teacher.group.get);
+router.get('/get', teacher.get);
+router.get('/list', teacher.list);
 // router.post('/group/', teacher.group.create);
 // router.patch('/group/:group_id/', teacher.group.update);
 // router.delete('/group/:group_id/', teacher.group.delete);
